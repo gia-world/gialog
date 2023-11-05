@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <header className="bg-red-300 flex justify-between px-10 py-4">
           <Link href="/">
-            <h1 className="flex">
+            <h1 className="flex items-center">
               <BsStars />
               GiaLog
             </h1>
