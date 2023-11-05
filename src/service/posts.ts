@@ -9,7 +9,7 @@ export type Post = {
   desc: string;
   tag: string[];
   imgUrl: string;
-  fileUrl?: string;
+  // fileUrl?: string;
   content?: string;
 };
 
@@ -29,7 +29,6 @@ export async function getPostsData(): Promise<Post[]> {
 
       // Use gray-matter to parse the post metadata section
       const matterResult = matter(fileContents);
-      console.log(matterResult);
 
       // Combine the data with the id
       // return {
@@ -37,6 +36,7 @@ export async function getPostsData(): Promise<Post[]> {
       //   ...matterResult.data,
       // };
 
+      //? 이렇게 일일이 확인하는 것이 최선일까?
       const tag = Array.isArray(matterResult.data.tag)
         ? matterResult.data.tag
         : typeof matterResult.data.tag === "string"
@@ -50,7 +50,7 @@ export async function getPostsData(): Promise<Post[]> {
         desc: matterResult.data.desc || "", // Ensure that desc is present
         tag,
         imgUrl: matterResult.data.imgUrl || "", // Ensure that imgUrl is present
-        content: matterResult.content || "",
+        content: matterResult.content || "", //? 이렇게 내용을 전체로 보내는 것이 적절한가?
       };
     })
   );
@@ -63,7 +63,7 @@ export async function getPosts(): Promise<Post[]> {
   // const data = await fs.readFile(filePath, "utf-8");
 
   const data1 = await getPostsData();
-  console.log(data1, "data1");
+  // console.log(data1, "data1");
 
   // return JSON.parse(data);
   return data1;

@@ -12,6 +12,4 @@
 - Tailwind
 - React-icon
 - React-slick
-- React-hook-form
-- yup
-- nodemailer
+- React-markdown

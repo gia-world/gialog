@@ -9,8 +9,10 @@ type Props = {
   };
 };
 
-async function PostDetailPage({ params }: Props) {
-  const { slug } = params;
+async function PostDetailPage({ params: { slug } }: Props) {
+  // const { slug } = params;
+
+  //? 여기서 다시 포스트를 받아오는게 효율적인가?
   const post = await getPost(slug);
 
   if (!post || !post.content) {

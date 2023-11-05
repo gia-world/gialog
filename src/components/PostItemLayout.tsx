@@ -10,8 +10,10 @@ type Props = {
 export default function PostItemLayout({ post }: Props) {
   return (
     <Link href={`/posts/${post.id}`}>
-      <div className="rounded-md shadow-md w-200 h-300 border">
-        <Image src={post.imgUrl} alt={post.title} />
+      <div className="rounded-md shadow-md border">
+        <div className="relative w-full h-20">
+          <Image src={post.imgUrl} alt={post.title} fill />
+        </div>
         <div>
           <p>{post.createdOn}</p>
           <p>{post.title}</p>
