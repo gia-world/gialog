@@ -9,16 +9,16 @@ export type Post = {
   desc: string;
   tag: string[];
   imgUrl: string;
-  // fileUrl?: string;
   content?: string;
 };
 
-export async function getPostsData(): Promise<Post[]> {
-  // Get file names under /posts
+// 리스트 목록 DB 화 시키기
+export async function getAllPostData(): Promise<Post[]> {
   const postsDirectory = path.join(process.cwd(), "public/posts");
+  // Get file names under /posts
   const fileNames = await fs.readdir(postsDirectory); // 비동기 메서드로 변경
 
-  const allPostsData = await Promise.all(
+  const allPostsListData = await Promise.all(
     fileNames.map(async (fileName) => {
       // Remove ".md" from file name to get id
       const id = fileName.replace(/\.md$/, "");
@@ -31,45 +31,23 @@ export async function getPostsData(): Promise<Post[]> {
       const matterResult = matter(fileContents);
 
       // Combine the data with the id
-      // return {
-      //   id,
-      //   ...matterResult.data,
-      // };
+      const result = { id, ...matterResult.data };
 
-      //? 이렇게 일일이 확인하는 것이 최선일까?
-      const tag = Array.isArray(matterResult.data.tag)
-        ? matterResult.data.tag
-        : typeof matterResult.data.tag === "string"
-        ? [matterResult.data.tag]
-        : [];
-
-      return {
-        id,
-        title: matterResult.data.title || "", // Ensure that title is present
-        createdOn: matterResult.data.createdOn || "", // Ensure that createdOn is present
-        desc: matterResult.data.desc || "", // Ensure that desc is present
-        tag,
-        imgUrl: matterResult.data.imgUrl || "", // Ensure that imgUrl is present
-        content: matterResult.content || "", //? 이렇게 내용을 전체로 보내는 것이 적절한가?
-      };
+      return result as unknown as Post;
     })
   );
 
-  return allPostsData;
+  return allPostsListData;
 }
 
-export async function getPosts(): Promise<Post[]> {
-  // const filePath = path.join(process.cwd(), "data", "posts.json");
-  // const data = await fs.readFile(filePath, "utf-8");
-
-  const data1 = await getPostsData();
-  // console.log(data1, "data1");
-
-  // return JSON.parse(data);
-  return data1;
+// 리스트 데이터 받아오기
+export async function getPostsList(): Promise<Post[]> {
+  const data = await getAllPostData();
+  return data;
 }
 
-export async function getPost(id: string): Promise<Post | undefined> {
-  const posts = await getPosts();
+// 디테일 데이터 받아오기
+export async function getPostDetail(id: string): Promise<Post | undefined> {
+  const posts = await getPostsList();
   return posts.find((item) => item.id === id);
 }

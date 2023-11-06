@@ -1,5 +1,5 @@
 import MarkdownRenderer from "@/components/MarkdownRenderer";
-import { getPost } from "@/service/posts";
+import { getPostDetail } from "@/service/posts";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -10,10 +10,8 @@ type Props = {
 };
 
 async function PostDetailPage({ params: { slug } }: Props) {
-  // const { slug } = params;
-
-  //? 여기서 다시 포스트를 받아오는게 효율적인가?
-  const post = await getPost(slug);
+  const post = await getPostDetail(slug);
+  console.log(post);
 
   if (!post || !post.content) {
     notFound();

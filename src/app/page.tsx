@@ -1,10 +1,10 @@
 import PostItemLayout from "@/components/PostItemLayout";
-import { getPosts } from "@/service/posts";
+import { getPostsList } from "@/service/posts";
 import AllPostsCarousel from "@/components/AllPostsCarousel";
 import Profile from "@/components/Profile";
 
 export default async function Home() {
-  const posts = await getPosts();
+  const posts = await getPostsList();
   const myPicks = [1, 2, 3];
   const featuredPosts = posts.filter((item) =>
     myPicks.includes(Number(item.id))
