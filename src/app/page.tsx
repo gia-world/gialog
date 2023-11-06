@@ -1,7 +1,7 @@
 import PostItemLayout from "@/components/PostItemLayout";
-import { getPostsList } from "@/service/posts";
 import AllPostsCarousel from "@/components/AllPostsCarousel";
 import Profile from "@/components/Profile";
+import { getPostsList } from "@/controller/posts";
 
 export default async function Home() {
   const posts = await getPostsList();

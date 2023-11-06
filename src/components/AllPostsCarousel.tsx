@@ -1,6 +1,5 @@
 "use client";
 
-import { Post } from "@/service/posts";
 import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
@@ -8,6 +7,7 @@ import PostItemLayout from "./PostItemLayout";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Post } from "@/controller/posts";
 
 // 캐러셀은 상태가 계속 바뀌어야 하므로 **클라이언트 컴포넌트**로 만들어야 함
 
