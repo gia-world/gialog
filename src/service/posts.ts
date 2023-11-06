@@ -5,10 +5,9 @@ import { Post } from "@/controller/posts";
 
 const postsDirectory = path.join(process.cwd(), "public/posts");
 
-// 리스트 목록 DB 화 시키기
-export async function fsGetAllPostData(): Promise<Post[]> {
+export async function fsGetPostsList(): Promise<Post[]> {
   const fileNames = await fs.readdir(postsDirectory);
-  const allPostsListData = await Promise.all(
+  const postsList = await Promise.all(
     fileNames.map(async (fileName) => {
       // Remove ".md" from file name to get id
       const id = fileName.replace(/\.md$/, "");
@@ -27,10 +26,9 @@ export async function fsGetAllPostData(): Promise<Post[]> {
     })
   );
 
-  return allPostsListData;
+  return postsList;
 }
 
-// 디테일 데이터 받아오기
 export async function fsGetPostDetail(id: string): Promise<Post | undefined> {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   try {

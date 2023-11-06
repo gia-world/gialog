@@ -1,4 +1,4 @@
-import { fsGetAllPostData, fsGetPostDetail } from "@/service/posts";
+import { fsGetPostDetail, fsGetPostsList } from "@/service/posts";
 
 export type Post = {
   id: string;
@@ -12,7 +12,7 @@ export type Post = {
 
 // 리스트 데이터 받아오기
 export async function getPostsList(): Promise<Post[]> {
-  const data = await fsGetAllPostData();
+  const data = await fsGetPostsList();
   return data;
 }
 
