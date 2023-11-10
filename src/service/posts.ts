@@ -16,10 +16,8 @@ export async function fsGetPostsList(): Promise<Post[]> {
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = await fs.readFile(fullPath, "utf8"); // 비동기 메서드로 변경
 
-      // Use gray-matter to parse the post metadata section
       const matterResult = matter(fileContents);
 
-      // Combine the data with the id
       const result = { id, ...matterResult.data };
 
       return result as unknown as Post;
@@ -43,5 +41,38 @@ export async function fsGetPostDetail(id: string): Promise<Post | undefined> {
   } catch (error) {
     console.error(`Error reading post ${id}: ${error}`);
     return undefined;
+  }
+}
+
+export async function fsCreatePost(data: Post) {
+  const { title, content, createdOn, desc, tag, imgUrl } = data;
+
+  // 마크다운 내용 생성
+  const markdownContent = `---
+title: ${title}
+createdOn: ${createdOn}
+desc: ${desc}
+tag: ${JSON.stringify(tag)}
+imgUrl: ${imgUrl}
+---
+
+${content}`;
+
+  const fileNames = await fs.readdir(postsDirectory);
+  const existingIds = fileNames.map((fileName) =>
+    Number(fileName.replace(/\.md$/, ""))
+  );
+  const maxId = Math.max(...existingIds);
+  const newId = maxId + 1;
+
+  const fileName = `${newId}.md`;
+  const filePath = path.join(postsDirectory, fileName);
+
+  try {
+    // 마크다운 파일 저장
+    await fs.writeFile(filePath, markdownContent, "utf-8");
+    console.log(`Markdown file "${fileName}" created successfully.`);
+  } catch (error) {
+    console.error("Error creating markdown file:", error);
   }
 }
