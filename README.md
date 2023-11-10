@@ -13,5 +13,3 @@
 - React-icon
 - React-slick
 - React-markdown
-- React-hook-form
-- Redux
