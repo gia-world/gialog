@@ -10,7 +10,6 @@ export type Post = {
   content?: string;
 };
 
-// 리스트 데이터 받아오기
 export async function getPostsList(): Promise<Post[]> {
   const data = await fsGetPostsList();
   return data;
