@@ -1,7 +1,8 @@
+"use client";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
-import { getPostDetail } from "@/controller/posts";
-import { notFound } from "next/navigation";
-import React from "react";
+import { Post } from "@/types/post";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 type Props = {
   params: {
@@ -9,17 +10,24 @@ type Props = {
   };
 };
 
-export default async function PostDetailPage({ params: { slug } }: Props) {
-  const post = await getPostDetail(slug);
+export default function PostDetailPage({ params: { slug } }: Props) {
+  const [post, setPost] = useState<Post>();
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(`/api/post/${slug}`);
+      if (response.status !== 200) {
+        throw new Error("Failed to fetch posts list");
+      }
+      console.log(response.data);
+      setPost(response.data);
+    };
+    fetchData();
+  }, []);
 
-  if (!post || !post.content) {
-    notFound();
-  } else {
-    return (
-      <>
-        <div className="bg-amber-200">{post.title}</div>
-        <MarkdownRenderer postContent={post.content} />
-      </>
-    );
-  }
+  return (
+    <>
+      <div className="bg-amber-200">{post && post.title}</div>
+      {post && <MarkdownRenderer postContent={post.content} />}
+    </>
+  );
 }
