@@ -38,51 +38,51 @@ export default function CreateForm() {
     //   console.error("Error sending data:", error);
     // }
   };
-  return <>hello</>;
-  // return (
-  //   <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-  //     <label className="flex gap-2">
-  //       <span>title</span>
-  //       <input defaultValue="test" {...register("title")} className="flex-1" />
-  //     </label>
-  //     <label className="flex gap-2">
-  //       <span>desc</span>
-  //       <input defaultValue="test" {...register("desc")} className="flex-1" />
-  //     </label>
-  //     <label className="flex gap-2">
-  //       <span>Tags</span>
-  //       <input
-  //         placeholder="Enter tags and press Enter"
-  //         {...register("tag")}
-  //         className="flex-1"
-  //         onKeyDown={(e) => {
-  //           if (e.key === "Enter") {
-  //             e.preventDefault();
-  //             const tagInput = (e.target as HTMLInputElement).value.trim();
-  //             if (tagInput !== "") {
-  //               setTagsArray((prevTags) => [...prevTags, tagInput]);
-  //               (e.target as HTMLInputElement).value = "";
-  //             }
-  //           }
-  //         }}
-  //       />
-  //     </label>
-  //     <div className="flex gap-2">
-  //       {tagsArray.map((tag, index) => (
-  //         <span key={index} className="tag">
-  //           {tag}
-  //         </span>
-  //       ))}
-  //     </div>
-  //     <label className="flex gap-2">
-  //       <span>content</span>
-  //       <textarea
-  //         defaultValue="test"
-  //         {...register("content")}
-  //         className="flex-1"
-  //       />
-  //     </label>
-  //     <input type="submit" />
-  //   </form>
-  // );
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+      <label className="flex gap-2">
+        <span>title</span>
+        <input defaultValue="test" {...register("title")} className="flex-1" />
+      </label>
+      <label className="flex gap-2">
+        <span>desc</span>
+        <input defaultValue="test" {...register("desc")} className="flex-1" />
+      </label>
+      <label className="flex gap-2">
+        <span>Tags</span>
+        <input
+          placeholder="Enter tags and press Enter"
+          {...register("tag")}
+          className="flex-1"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              const tagInput = (e.target as HTMLInputElement).value.trim();
+              if (tagInput !== "") {
+                setTagsArray((prevTags) => [...prevTags, tagInput]);
+                (e.target as HTMLInputElement).value = "";
+              }
+            }
+          }}
+        />
+      </label>
+      <div className="flex gap-2">
+        {tagsArray.map((tag, index) => (
+          <span key={index} className="tag">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <label className="flex gap-2">
+        <span>content</span>
+        <textarea
+          defaultValue="test"
+          {...register("content")}
+          className="flex-1"
+        />
+      </label>
+      <input type="submit" />
+    </form>
+  );
 }
