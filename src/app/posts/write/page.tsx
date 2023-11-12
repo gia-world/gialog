@@ -39,7 +39,7 @@ export default function WritePost() {
 
         <input type="submit" />
       </form>
-      {/* <CreateForm /> */}
+      <CreateForm />
     </section>
   );
 }

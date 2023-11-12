@@ -46,14 +46,14 @@ export async function fsGetPostDetail(id: string): Promise<Post | undefined> {
 
 export async function fsCreatePost(data: CreatePost) {
   const { title, content, createdOn, desc, tag, imgUrl } = data;
-
+  console.log("fsCreatePost called");
   // 마크다운 내용 생성
   const markdownContent = `---
-title: ${title}
-createdOn: ${createdOn}
-desc: ${desc}
+title: "${title}"
+createdOn: "${createdOn}"
+desc: "${desc}"
 tag: ${JSON.stringify(tag)}
-imgUrl: ${imgUrl}
+imgUrl: "${imgUrl}"
 ---
 
 ${content}`;
@@ -69,10 +69,15 @@ ${content}`;
   const filePath = path.join(postsDirectory, fileName);
 
   try {
-    // 마크다운 파일 저장
+    // 마크다운 파일 생성
     await fs.writeFile(filePath, markdownContent, "utf-8");
-    console.log(`Markdown file "${fileName}" created successfully.`);
+    // 성공적으로 파일이 생성되었을 때의 응답
+    return {
+      success: true,
+      message: `Markdown file "${fileName}" created successfully.`,
+    };
   } catch (error) {
-    console.error("Error creating markdown file:", error);
+    // 파일 생성 중에 에러가 발생했을 때의 응답
+    return { success: false, message: "Internal Server Error" };
   }
 }

@@ -12,6 +12,12 @@ export async function getPostDetail(id: string): Promise<Post | undefined> {
 }
 
 export async function createPost(data: CreatePost) {
-  await fsCreatePost(data);
-  console.log(data, "서버");
+  // const result = await fsCreatePost(data);
+  // console.log(data, "서버");
+  // return result;
+  const fileName = await fsCreatePost(data);
+  return {
+    success: true,
+    fileName,
+  };
 }
