@@ -13,3 +13,4 @@
 - React-icon
 - React-slick
 - React-markdown
+- Axios

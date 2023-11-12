@@ -2,6 +2,7 @@
 import { createPost } from "@/controller/posts";
 import { CreatePost } from "@/types/post";
 import today from "@/utils/today";
+import axios from "axios";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -23,16 +24,14 @@ export default function CreateForm() {
     console.log(payload, "postData");
 
     try {
-      const response = await fetch("/api/post", {
-        method: "POST",
+      const response = await axios.post("/api/post", payload, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 200) {
+        const data = response.data;
         console.log(data.message);
       } else {
         console.error("Failed to create file");
