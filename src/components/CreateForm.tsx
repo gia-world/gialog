@@ -1,19 +1,8 @@
 "use client";
 import { createPost, Post } from "@/controller/posts";
+import today from "@/utils/today";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
-function today() {
-  const today = new Date();
-
-  const year = today.getFullYear();
-  const month = ("0" + (today.getMonth() + 1)).slice(-2);
-  const day = ("0" + today.getDate()).slice(-2);
-
-  const dateString = year + "-" + month + "-" + day;
-
-  return dateString;
-}
 
 export default function CreateForm() {
   const [tagsArray, setTagsArray] = useState<string[]>([]);

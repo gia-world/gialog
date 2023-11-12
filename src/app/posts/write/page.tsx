@@ -1,30 +1,10 @@
 import CreateForm from "@/components/CreateForm";
 import { createPost, Post } from "@/controller/posts";
-
-function today() {
-  const today = new Date();
-
-  const year = today.getFullYear();
-  const month = ("0" + (today.getMonth() + 1)).slice(-2);
-  const day = ("0" + today.getDate()).slice(-2);
-
-  const dateString = year + "-" + month + "-" + day;
-
-  return dateString;
-}
-
-function formDataToPost(formData: FormData): Post {
-  const post: any = {};
-  formData.forEach((value, key) => {
-    if (["title", "desc", "tag", "content"].includes(key)) {
-      post[key] = key === "tag" ? (value as String).split(",") : value;
-    }
-  });
-  return post as Post;
-}
+import formDataToPost from "@/utils/formDataToPost";
+import today from "@/utils/today";
 
 export default function WritePost() {
-  async function create(formData: FormData) {
+  const create = async (formData: FormData) => {
     "use server";
     console.log(formData, "formdata");
     const post = formDataToPost(formData);
@@ -34,7 +14,7 @@ export default function WritePost() {
       createdOn: String(today()),
       imgUrl: "https://source.unsplash.com/random",
     });
-  }
+  };
 
   return (
     <section>

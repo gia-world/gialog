@@ -9,7 +9,7 @@ type Props = {
   };
 };
 
-async function PostDetailPage({ params: { slug } }: Props) {
+export default async function PostDetailPage({ params: { slug } }: Props) {
   const post = await getPostDetail(slug);
 
   if (!post || !post.content) {
@@ -23,5 +23,3 @@ async function PostDetailPage({ params: { slug } }: Props) {
     );
   }
 }
-
-export default PostDetailPage;

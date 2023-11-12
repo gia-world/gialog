@@ -54,9 +54,7 @@ export default function AllPostsCarousel({ posts }: Props) {
     <Slider {...settings}>
       {posts.map((post) => (
         <li key={`post-${post.id}`}>
-          <Link href="">
-            <PostItemLayout post={post} />
-          </Link>
+          <PostItemLayout post={post} />
         </li>
       ))}
     </Slider>
