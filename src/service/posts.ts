@@ -1,33 +1,36 @@
 import path from "path";
 import { promises as fs } from "fs";
 import matter from "gray-matter";
-import { CreatePost, Post } from "@/types/post";
+import { CreatePost, Post, ApiResponse } from "@/types/post";
 
 const postsDirectory = path.join(process.cwd(), "public/posts");
 
-export async function fsGetPostsList(): Promise<Post[]> {
-  const fileNames = await fs.readdir(postsDirectory);
-  const postsList = await Promise.all(
-    fileNames.map(async (fileName) => {
-      // Remove ".md" from file name to get id
-      const id = fileName.replace(/\.md$/, "");
+export async function fsGetPostsList(): Promise<ApiResponse<Post[]>> {
+  try {
+    const fileNames = await fs.readdir(postsDirectory);
+    const postsList = await Promise.all(
+      fileNames.map(async (fileName) => {
+        // Remove ".md" from file name to get id
+        const id = fileName.replace(/\.md$/, "");
 
-      // Read markdown file as string
-      const fullPath = path.join(postsDirectory, fileName);
-      const fileContents = await fs.readFile(fullPath, "utf8"); // 비동기 메서드로 변경
+        // Read markdown file as string
+        const fullPath = path.join(postsDirectory, fileName);
+        const fileContents = await fs.readFile(fullPath, "utf8"); // 비동기 메서드로 변경
 
-      const matterResult = matter(fileContents);
+        const matterResult = matter(fileContents);
 
-      const result = { id, ...matterResult.data };
+        const result = { id, ...matterResult.data };
 
-      return result as unknown as Post;
-    })
-  );
-
-  return postsList;
+        return result as unknown as Post;
+      })
+    );
+    return { success: true, data: postsList };
+  } catch (error) {
+    return { success: false, error: `Error reading posts list: ${error}` };
+  }
 }
 
-export async function fsGetPostDetail(id: string): Promise<Post | undefined> {
+export async function fsGetPostDetail(id: string): Promise<ApiResponse<Post>> {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   try {
     const fileContents = await fs.readFile(fullPath, "utf8");
@@ -37,16 +40,15 @@ export async function fsGetPostDetail(id: string): Promise<Post | undefined> {
       ...matterResult.data,
       content: matterResult.content,
     } as unknown as Post;
-    return post;
+    return { success: true, data: post };
   } catch (error) {
     console.error(`Error reading post ${id}: ${error}`);
-    return undefined;
+    return { success: false, error: `Error reading post ${id}: ${error}` };
   }
 }
 
 export async function fsCreatePost(data: CreatePost) {
   const { title, content, createdOn, desc, tag, imgUrl } = data;
-  console.log("fsCreatePost called");
   // 마크다운 내용 생성
   const markdownContent = `---
 title: "${title}"

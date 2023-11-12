@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import PostItemLayout from "./PostItemLayout";
 
@@ -15,7 +15,38 @@ type Props = {
   posts: Post[];
 };
 
-export default function AllPostsCarousel({ posts }: Props) {
+export default function AllPostsCarousel() {
+  async function fetchPostsList() {
+    try {
+      const response = await fetch("/api/post/list", {
+        method: "GET",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch posts list");
+      }
+
+      const res = await response.json();
+      return res;
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+  const [data, setData] = useState<Post[]>();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const postsListData = await fetchPostsList();
+        setData(postsListData);
+      } catch (error) {
+        console.error("Error fetching posts list:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  // const postsListData = await fetchPostsList();
+  // console.log(postsListData);
+
   const settings = {
     dots: true,
     infinite: false,
@@ -52,11 +83,12 @@ export default function AllPostsCarousel({ posts }: Props) {
   };
   return (
     <Slider {...settings}>
-      {posts.map((post) => (
-        <li key={`post-${post.id}`}>
-          <PostItemLayout post={post} />
-        </li>
-      ))}
+      {data &&
+        data.map((post) => (
+          <li key={`post-${post.id}`}>
+            <PostItemLayout post={post} />
+          </li>
+        ))}
     </Slider>
   );
 }

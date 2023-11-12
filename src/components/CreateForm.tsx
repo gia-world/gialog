@@ -21,22 +21,7 @@ export default function CreateForm() {
       imgUrl: "https://source.unsplash.com/random",
     };
     console.log(payload, "postData");
-    console.log(typeof JSON.stringify(tagsArray));
-    // try {
-    //   createPost(payload);
-    // } catch (error) {
-    //   // 네트워크 오류 등의 예외 처리
-    //   console.error("Error sending data:", error);
-    // }
 
-    // const response = await axios.post("/api/posts", data);
-
-    // if (response.status === 201) {
-    //   console.log("게시물이 성공적으로 생성되었습니다.");
-    //   console.log("게시물 ID:", response.data.id);
-    // } else {
-    //   console.log("게시물 생성에 실패했습니다.");
-    // }
     try {
       const response = await fetch("/api/post", {
         method: "POST",
