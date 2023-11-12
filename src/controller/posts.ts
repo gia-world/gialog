@@ -1,14 +1,5 @@
 import { fsCreatePost, fsGetPostDetail, fsGetPostsList } from "@/service/posts";
-
-export type Post = {
-  id: string;
-  title: string;
-  createdOn: string;
-  desc: string;
-  tag: string[];
-  imgUrl: string;
-  content?: string;
-};
+import { CreatePost, Post } from "@/types/post";
 
 export async function getPostsList(): Promise<Post[]> {
   const data = await fsGetPostsList();
@@ -20,7 +11,7 @@ export async function getPostDetail(id: string): Promise<Post | undefined> {
   return data;
 }
 
-export async function createPost(data: any) {
+export async function createPost(data: CreatePost) {
   await fsCreatePost(data);
   console.log(data, "서버");
 }

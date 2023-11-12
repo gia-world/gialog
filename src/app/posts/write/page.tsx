@@ -1,5 +1,5 @@
 import CreateForm from "@/components/CreateForm";
-import { createPost, Post } from "@/controller/posts";
+import { createPost } from "@/controller/posts";
 import formDataToPost from "@/utils/formDataToPost";
 import today from "@/utils/today";
 

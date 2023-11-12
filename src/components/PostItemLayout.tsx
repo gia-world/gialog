@@ -1,4 +1,4 @@
-import { Post } from "@/controller/posts";
+import { Post } from "@/types/post";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

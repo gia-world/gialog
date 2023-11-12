@@ -1,4 +1,4 @@
-import { Post } from "@/controller/posts";
+import { Post } from "@/types/post";
 import React from "react";
 import PostItemLayout from "./PostItemLayout";
 

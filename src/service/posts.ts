@@ -1,7 +1,7 @@
 import path from "path";
 import { promises as fs } from "fs";
 import matter from "gray-matter";
-import { Post } from "@/controller/posts";
+import { CreatePost, Post } from "@/types/post";
 
 const postsDirectory = path.join(process.cwd(), "public/posts");
 
@@ -44,7 +44,7 @@ export async function fsGetPostDetail(id: string): Promise<Post | undefined> {
   }
 }
 
-export async function fsCreatePost(data: Post) {
+export async function fsCreatePost(data: CreatePost) {
   const { title, content, createdOn, desc, tag, imgUrl } = data;
 
   // 마크다운 내용 생성
