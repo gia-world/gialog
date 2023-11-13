@@ -1,25 +1,22 @@
 import CreateForm from "@/components/CreateForm";
-import { createPost } from "@/controller/posts";
-import formDataToPost from "@/utils/formDataToPost";
-import today from "@/utils/today";
 
 export default function WritePost() {
-  const create = async (formData: FormData) => {
-    "use server";
-    console.log(formData, "formdata");
-    const post = formDataToPost(formData);
-    console.log(post, "formdatatopost");
-    createPost({
-      ...post,
-      createdOn: String(today()),
-      imgUrl: "https://source.unsplash.com/random",
-    });
-  };
+  // const create = async (formData: FormData) => {
+  //   "use server";
+  //   console.log(formData, "formdata");
+  //   const post = formDataToPost(formData);
+  //   console.log(post, "formdatatopost");
+  //   createPost({
+  //     ...post,
+  //     createdOn: String(today()),
+  //     imgUrl: "https://source.unsplash.com/random",
+  //   });
+  // };
 
   return (
     <section>
       <h2>포스트 작성</h2>
-      <form action={create}>
+      {/* <form action={create}>
         <label className="flex gap-2">
           <span>title</span>
           <input defaultValue="test" name="title" className="flex-1" />
@@ -38,7 +35,7 @@ export default function WritePost() {
         </label>
 
         <input type="submit" />
-      </form>
+      </form> */}
       <CreateForm />
     </section>
   );

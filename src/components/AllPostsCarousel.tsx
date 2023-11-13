@@ -9,6 +9,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Post } from "@/types/post";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { fetchAllPostsData } from "@/redux/actions";
 
 // 캐러셀은 상태가 계속 바뀌어야 하므로 **클라이언트 컴포넌트**로 만들어야 함
 
@@ -17,6 +19,10 @@ type Props = {
 };
 
 export default function AllPostsCarousel() {
+  const dispatch = useDispatch();
+
+  dispatch(fetchAllPostsData());
+
   async function fetchPostsList() {
     try {
       const response = await axios.get("/api/post/list");
@@ -29,19 +35,6 @@ export default function AllPostsCarousel() {
     } catch (error) {
       console.error("Error:", error);
     }
-    // try {
-    //   const response = await fetch("/api/post/list", {
-    //     method: "GET",
-    //   });
-    //   if (!response.ok) {
-    //     throw new Error("Failed to fetch posts list");
-    //   }
-
-    //   const res = await response.json();
-    //   return res;
-    // } catch (error) {
-    //   console.error("Error:", error);
-    // }
   }
   const [data, setData] = useState<Post[]>();
   useEffect(() => {

@@ -1,27 +1,32 @@
 "use client";
-import { createPost } from "@/controller/posts";
-import { CreatePost } from "@/types/post";
+
+import { CREATE_POST } from "@/redux/actions";
+import { RootState } from "@/redux/store";
+import { NewPost } from "@/types/post";
 import today from "@/utils/today";
 import axios from "axios";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function CreateForm() {
+  const dispatch = useDispatch();
+  const posts = useSelector((state: RootState) => state.posts);
+
   const [tagsArray, setTagsArray] = useState<string[]>([]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreatePost>();
-  const onSubmit: SubmitHandler<CreatePost> = async (data) => {
+  } = useForm<NewPost>();
+  const onSubmit: SubmitHandler<NewPost> = async (data) => {
     const payload = {
       ...data,
       tag: tagsArray,
       createdOn: today(),
       imgUrl: "https://source.unsplash.com/random",
     };
-    console.log(payload, "postData");
 
     try {
       const response = await axios.post("/api/post", payload, {
@@ -31,8 +36,10 @@ export default function CreateForm() {
       });
 
       if (response.status === 200) {
-        const data = response.data;
-        console.log(data.message);
+        const { data } = response.data;
+        console.log(data, "response.data");
+        dispatch(CREATE_POST(data));
+        console.log("Dispatched action:", CREATE_POST(data));
       } else {
         console.error("Failed to create file");
       }

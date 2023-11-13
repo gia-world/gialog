@@ -1,7 +1,7 @@
 import path from "path";
 import { promises as fs } from "fs";
 import matter from "gray-matter";
-import { CreatePost, Post, ApiResponse } from "@/types/post";
+import { NewPost, Post, ApiResponse } from "@/types/post";
 
 const postsDirectory = path.join(process.cwd(), "public/posts");
 
@@ -47,7 +47,7 @@ export async function fsGetPostDetail(id: string): Promise<ApiResponse<Post>> {
   }
 }
 
-export async function fsCreatePost(data: CreatePost) {
+export async function fsCreatePost(data: NewPost) {
   const { title, content, createdOn, desc, tag, imgUrl } = data;
   // 마크다운 내용 생성
   const markdownContent = `---
@@ -77,6 +77,7 @@ ${content}`;
     return {
       success: true,
       message: `Markdown file "${fileName}" created successfully.`,
+      data: { ...data, id: newId },
     };
   } catch (error) {
     // 파일 생성 중에 에러가 발생했을 때의 응답

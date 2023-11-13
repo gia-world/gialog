@@ -1,8 +1,9 @@
+import ReduxProvider from "@/redux/provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import "./globals.css";
 import { BsStars } from "react-icons/bs";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +34,7 @@ export default function RootLayout({
           </nav>
         </header>
         <main className="min-h-screen flex flex-col gap-4 px-10 py-6">
-          {children}
+          <ReduxProvider>{children}</ReduxProvider>
         </main>
         <footer className="bg-slate-400 py-2 text-center">footer</footer>
       </body>
