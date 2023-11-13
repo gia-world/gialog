@@ -22,7 +22,7 @@ export default function PostDetailPage({ params: { slug } }: Props) {
       setPost(response.data);
     };
     fetchData();
-  }, []);
+  }, [slug]);
 
   return (
     <>
