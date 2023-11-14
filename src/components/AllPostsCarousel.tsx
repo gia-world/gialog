@@ -1,16 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import PostItemLayout from "./PostItemLayout";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { RootState } from "@/redux/store";
 import { Post } from "@/types/post";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { fetchAllPostsData } from "@/redux/actions";
+import { useSelector } from "react-redux";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 // 캐러셀은 상태가 계속 바뀌어야 하므로 **클라이언트 컴포넌트**로 만들어야 함
 
@@ -19,38 +17,34 @@ type Props = {
 };
 
 export default function AllPostsCarousel() {
-  const dispatch = useDispatch();
+  const posts = useSelector((state: RootState) => state.posts);
+  // async function fetchPostsList() {
+  //   try {
+  //     const response = await axios.get("/api/post/list");
 
-  dispatch(fetchAllPostsData());
+  //     if (response.status !== 200) {
+  //       throw new Error("Failed to fetch posts list");
+  //     }
 
-  async function fetchPostsList() {
-    try {
-      const response = await axios.get("/api/post/list");
-
-      if (response.status !== 200) {
-        throw new Error("Failed to fetch posts list");
-      }
-
-      return response.data;
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
-  const [data, setData] = useState<Post[]>();
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // }
+  const [data, setData] = useState<Post[]>(posts);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const postsListData = await fetchPostsList();
-        setData(postsListData);
-      } catch (error) {
-        console.error("Error fetching posts list:", error);
-      }
-    };
+    // const fetchData = async () => {
+    //   try {
+    //     const postsListData = await fetchPostsList();
+    //     setData(postsListData);
+    //   } catch (error) {
+    //     console.error("Error fetching posts list:", error);
+    //   }
+    // };
 
-    fetchData();
-  }, []);
-  // const postsListData = await fetchPostsList();
-  // console.log(postsListData);
+    // fetchData();
+    setData(posts);
+  }, [posts]);
 
   const settings = {
     dots: true,

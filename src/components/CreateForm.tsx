@@ -1,16 +1,16 @@
 "use client";
 
-import { CREATE_POST } from "@/redux/actions";
-import { RootState } from "@/redux/store";
+import { createPost } from "@/redux/actions";
+import { RootState, useAppDispatch } from "@/redux/store";
 import { NewPost } from "@/types/post";
 import today from "@/utils/today";
 import axios from "axios";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function CreateForm() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const posts = useSelector((state: RootState) => state.posts);
 
   const [tagsArray, setTagsArray] = useState<string[]>([]);
@@ -38,8 +38,8 @@ export default function CreateForm() {
       if (response.status === 200) {
         const { data } = response.data;
         console.log(data, "response.data");
-        dispatch(CREATE_POST(data));
-        console.log("Dispatched action:", CREATE_POST(data));
+        dispatch(createPost(data));
+        console.log("Dispatched action:", createPost(data));
       } else {
         console.error("Failed to create file");
       }

@@ -1,39 +1,43 @@
 import {
-  GET_ALL_POSTS_REQUEST,
-  GET_ALL_POSTS_SUCCESS,
-  GET_ALL_POSTS_FAILURE,
   CREATE_POST,
+  LOAD_POSTS_FAILURE,
+  LOAD_POSTS_REQUEST,
+  LOAD_POSTS_SUCCESS,
 } from "./actions";
-import { Post } from "@/types/post";
 
-interface PostsState {
-  posts: Post[];
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null;
-}
-
-const initialState: PostsState = {
+const initialState = {
   posts: [],
-  status: "idle",
-  error: null,
+  isLoaddingPosts: false,
+  isLoadedPosts: false,
+  loadPostsErrorReason: "",
 };
 
 const postsReducer = (
-  state: PostsState = initialState,
-  action: any
-): PostsState => {
+  state = initialState,
+  action: { type: string; payload: any }
+) => {
   switch (action.type) {
-    case GET_ALL_POSTS_REQUEST:
-      return { ...state, status: "loading" };
-    case GET_ALL_POSTS_SUCCESS:
+    case LOAD_POSTS_REQUEST: {
       return {
         ...state,
-        status: "succeeded",
-        posts: action.payload,
-        error: null,
+        isLoaddingPosts: true,
       };
-    case GET_ALL_POSTS_FAILURE:
-      return { ...state, status: "failed", error: action.payload };
+    }
+    case LOAD_POSTS_SUCCESS: {
+      return {
+        ...state,
+        isLoaddingPosts: false,
+        isLoadedPosts: true,
+        posts: action.payload,
+      };
+    }
+    case LOAD_POSTS_FAILURE: {
+      return {
+        ...state,
+        isLoaddingPosts: false,
+        loadPostsErrorReason: "불러오기 실패",
+      };
+    }
     case CREATE_POST:
       return { ...state, posts: [...state.posts, action.payload] };
     default:

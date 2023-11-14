@@ -1,33 +1,39 @@
 import { Post } from "@/types/post";
 import { Dispatch } from "redux";
 
+export const LOAD_POSTS_REQUEST = "LOAD_POSTS_REQUEST";
+export const LOAD_POSTS_SUCCESS = "LOAD_POSTS_SUCCESS";
+export const LOAD_POSTS_FAILURE = "LOAD_POSTS_FAILURE";
+export const CREATE_POST = "CREATE_POST";
+
 // 액션 생성자 함수 정의
-export const CREATE_POST = (post: Post) => ({
-  type: "CREATE_POST",
-  payload: post,
+export const loadPostsRequest = () => ({
+  type: LOAD_POSTS_REQUEST,
 });
-export const GET_ALL_POSTS_REQUEST = () => ({
-  type: "GET_ALL_POSTS_REQUEST",
-});
-export const GET_ALL_POSTS_SUCCESS = (posts: Post[]) => ({
-  type: "GET_ALL_POSTS_SUCCESS",
+
+export const loadPostsSuccess = (posts: Post[]) => ({
+  type: LOAD_POSTS_SUCCESS,
   payload: posts,
 });
-export const GET_ALL_POSTS_FAILURE = (error: string) => ({
-  type: "GET_ALL_POSTS_FAILURE",
-  payload: error,
+
+export const loadPostsFailure = () => ({
+  type: LOAD_POSTS_FAILURE,
+});
+export const createPost = (post: Post) => ({
+  type: CREATE_POST,
+  payload: post,
 });
 
 // 비동기 액션 생성자 함수
 export const fetchAllPostsData = () => async (dispatch: Dispatch) => {
   try {
-    dispatch(GET_ALL_POSTS_REQUEST());
+    dispatch(loadPostsRequest());
 
     const response = await fetch("/api/post/list");
     const posts = await response.json();
 
-    dispatch(GET_ALL_POSTS_SUCCESS(posts));
+    dispatch(loadPostsSuccess(posts));
   } catch (error) {
-    dispatch(GET_ALL_POSTS_FAILURE("An error occurred."));
+    dispatch(loadPostsFailure());
   }
 };
