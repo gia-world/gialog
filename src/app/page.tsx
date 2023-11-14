@@ -27,6 +27,7 @@ export default async function Home() {
   return (
     <>
       <FetchData />
+      {/* //? 전체 데이터를 dispatch 하는 더 좋은 방법이 있을 것 같은데... */}
       <Profile />
       {/* <FeaturedPosts posts={posts} /> */}
       <section>

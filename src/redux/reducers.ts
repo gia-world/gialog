@@ -7,9 +7,8 @@ import {
 
 const initialState = {
   posts: [],
-  isLoaddingPosts: false,
-  isLoadedPosts: false,
-  loadPostsErrorReason: "",
+  loadPostsStatus: "idle",
+  loadPostsError: "",
 };
 
 const postsReducer = (
@@ -20,22 +19,26 @@ const postsReducer = (
     case LOAD_POSTS_REQUEST: {
       return {
         ...state,
-        isLoaddingPosts: true,
+        // isLoaddingPosts: true,
+        loadPostsStatus: "loading",
       };
     }
     case LOAD_POSTS_SUCCESS: {
       return {
         ...state,
-        isLoaddingPosts: false,
-        isLoadedPosts: true,
+
+        loadPostsStatus: "success",
+        // isLoaddingPosts: false,
+        // isLoadedPosts: true,
         posts: action.payload,
       };
     }
     case LOAD_POSTS_FAILURE: {
       return {
         ...state,
-        isLoaddingPosts: false,
-        loadPostsErrorReason: "불러오기 실패",
+        // isLoaddingPosts: false,
+        loadPostsStatus: "failed",
+        loadPostsError: "불러오기 실패",
       };
     }
     case CREATE_POST:

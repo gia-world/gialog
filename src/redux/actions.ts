@@ -24,7 +24,8 @@ export const createPost = (post: Post) => ({
   payload: post,
 });
 
-// 비동기 액션 생성자 함수
+// 비동기 액션 생성자 함수 (thunk 이용)
+//!: Redux Thunk : 비동기 작업을 수행하고 액션을 디스패치할 수 있다.
 export const fetchAllPostsData = () => async (dispatch: Dispatch) => {
   try {
     dispatch(loadPostsRequest());

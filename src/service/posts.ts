@@ -49,6 +49,7 @@ export async function fsGetPostDetail(id: string): Promise<ApiResponse<Post>> {
 
 export async function fsCreatePost(data: NewPost) {
   const { title, content, createdOn, desc, tag, imgUrl } = data;
+
   // 마크다운 내용 생성
   const markdownContent = `---
 title: "${title}"
@@ -71,16 +72,13 @@ ${content}`;
   const filePath = path.join(postsDirectory, fileName);
 
   try {
-    // 마크다운 파일 생성
     await fs.writeFile(filePath, markdownContent, "utf-8");
-    // 성공적으로 파일이 생성되었을 때의 응답
     return {
       success: true,
       message: `Markdown file "${fileName}" created successfully.`,
       data: { ...data, id: newId },
     };
   } catch (error) {
-    // 파일 생성 중에 에러가 발생했을 때의 응답
-    return { success: false, message: "Internal Server Error" };
+    return { success: false, message: "Creating MD file has failed." };
   }
 }
