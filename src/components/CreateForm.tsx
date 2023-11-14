@@ -1,6 +1,6 @@
 "use client";
 
-import { createPost } from "@/redux/actions";
+import { createPost } from "@/redux/posts/actions";
 import { RootState, useAppDispatch } from "@/redux/store";
 import { NewPost } from "@/types/post";
 import today from "@/utils/today";

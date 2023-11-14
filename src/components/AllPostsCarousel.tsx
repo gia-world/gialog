@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import PostItemLayout from "./PostItemLayout";
 
@@ -9,42 +8,13 @@ import { Post } from "@/types/post";
 import { useSelector } from "react-redux";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import useFetchData from "./useFetchData";
 
 // 캐러셀은 상태가 계속 바뀌어야 하므로 **클라이언트 컴포넌트**로 만들어야 함
 
-type Props = {
-  posts: Post[];
-};
-
 export default function AllPostsCarousel() {
-  const posts = useSelector((state: RootState) => state.posts);
-  // async function fetchPostsList() {
-  //   try {
-  //     const response = await axios.get("/api/post/list");
-
-  //     if (response.status !== 200) {
-  //       throw new Error("Failed to fetch posts list");
-  //     }
-
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // }
-  const [data, setData] = useState<Post[]>(posts);
-  useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const postsListData = await fetchPostsList();
-    //     setData(postsListData);
-    //   } catch (error) {
-    //     console.error("Error fetching posts list:", error);
-    //   }
-    // };
-
-    // fetchData();
-    setData(posts);
-  }, [posts]);
+  useFetchData();
+  const data: Post[] = useSelector((state: RootState) => state.posts.posts);
 
   const settings = {
     dots: true,

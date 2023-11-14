@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import postsReducer from "./reducers";
+import { RootReducer } from "./reducers";
 
 const store = configureStore({
-  reducer: postsReducer,
+  reducer: RootReducer,
 });
 console.log(store.getState(), "스토어 상태");
 

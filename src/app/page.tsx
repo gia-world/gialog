@@ -1,7 +1,10 @@
 import AllPostsCarousel from "@/components/AllPostsCarousel";
 import FeaturedPosts from "@/components/FeaturedPosts";
-import FetchData from "@/components/FetchData";
+import FetchData from "@/components/useFetchData";
 import Profile from "@/components/Profile";
+import { fetchAllPostsData } from "@/redux/posts/actions";
+import { useAppDispatch } from "@/redux/store";
+import useFetchData from "@/components/useFetchData";
 export default async function Home() {
   // const posts = await getPostsList();
   // console.log(posts);
@@ -23,10 +26,10 @@ export default async function Home() {
 
   // const postsListData = await fetchPostsList();
   // console.log(postsListData);
-
+  //
   return (
     <>
-      <FetchData />
+      {/* <useFetchData /> */}
       {/* //? 전체 데이터를 dispatch 하는 더 좋은 방법이 있을 것 같은데... */}
       <Profile />
       {/* <FeaturedPosts posts={posts} /> */}

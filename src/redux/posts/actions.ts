@@ -28,12 +28,12 @@ export const createPost = (post: Post) => ({
 //!: Redux Thunk : 비동기 작업을 수행하고 액션을 디스패치할 수 있다.
 export const fetchAllPostsData = () => async (dispatch: Dispatch) => {
   try {
-    dispatch(loadPostsRequest());
+    dispatch(loadPostsRequest()); // 시작
 
     const response = await fetch("/api/post/list");
     const posts = await response.json();
 
-    dispatch(loadPostsSuccess(posts));
+    dispatch(loadPostsSuccess(posts)); // 끝
   } catch (error) {
     dispatch(loadPostsFailure());
   }

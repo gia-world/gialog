@@ -1,9 +1,10 @@
 "use client";
-import { fetchAllPostsData } from "@/redux/actions";
+import { fetchAllPostsData } from "@/redux/posts/actions";
 import { useAppDispatch } from "@/redux/store";
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function FetchData() {
+// 커스텀 훅 생성
+export default function useFetchData() {
   const dispatch = useAppDispatch();
   const fetchData = async () => {
     try {
@@ -13,6 +14,8 @@ export default function FetchData() {
       // 에러 처리
     }
   };
-  fetchData();
-  return <div>FetchData</div>;
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 }
