@@ -1,13 +1,18 @@
-import { fsGetPostDetail, fsGetPostsList } from "@/service/posts";
+import {
+  fsDeletePost,
+  fsGetPostDetail,
+  fsGetPostsList,
+  fsUpdatePost,
+} from "@/service/posts";
 import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const id = params.slug;
+  const postId = params.slug;
   try {
-    const res = await fsGetPostDetail(id);
+    const res = await fsGetPostDetail(postId);
 
     if (res.success) {
       return NextResponse.json(res.data);
@@ -24,4 +29,25 @@ export async function GET(
       { status: 500 }
     );
   }
+}
+
+export async function PUT(
+  req: Request,
+  { params }: { params: { slug: string } }
+) {
+  const postId = params.slug;
+  const data = await req.json();
+
+  const result = await fsUpdatePost(postId, data);
+  return NextResponse.json(result);
+}
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: { slug: string } }
+) {
+  const postId = params.slug;
+
+  const result = await fsDeletePost(postId);
+  return NextResponse.json(result);
 }

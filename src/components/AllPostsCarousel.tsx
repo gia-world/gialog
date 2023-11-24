@@ -14,7 +14,16 @@ import useFetchData from "./useFetchData";
 
 export default function AllPostsCarousel() {
   useFetchData();
-  const data: Post[] = useSelector((state: RootState) => state.posts.posts);
+  // const data: Post[] = useSelector((state: RootState) => state.posts.data);
+
+  // const state = useSelector((state: RootState) => state.posts);
+  // const data = state.data;
+  // const loadingFinished = state.loadPostsStatus === "success";
+
+  const postsState = useSelector((state: RootState) => state.posts);
+  const { data, loadPostsStatus } = postsState;
+
+  const loadingFinished = loadPostsStatus === "success";
 
   const settings = {
     dots: true,
@@ -50,14 +59,18 @@ export default function AllPostsCarousel() {
       },
     ],
   };
-  return (
-    <Slider {...settings}>
-      {data &&
-        data.map((post) => (
+
+  if (loadingFinished) {
+    return (
+      <Slider {...settings}>
+        {data.map((post) => (
           <li key={`post-${post.id}`}>
             <PostItemLayout post={post} />
           </li>
         ))}
-    </Slider>
-  );
+      </Slider>
+    );
+  } else {
+    return null;
+  }
 }

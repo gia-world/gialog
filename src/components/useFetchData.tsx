@@ -12,6 +12,7 @@ export default function useFetchData() {
       console.log("dispatch fetch all posts called");
     } catch (error) {
       // 에러 처리
+      console.error("dispatch failed");
     }
   };
 

@@ -1,3 +1,4 @@
+import { Post } from "@/types/post";
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { RootReducer } from "./reducers";
@@ -12,4 +13,14 @@ export type AppDispatch = typeof store.dispatch; // you can use this Dispatch ty
 export const useAppDispatch = () => useDispatch<AppDispatch>(); // Export a hook that can be reused to resolve types
 
 export default store;
-export type RootState = ReturnType<typeof store.getState>;
+
+// export type RootState = ReturnType<typeof store.getState>;
+
+type PostsState = {
+  data: Post[];
+  loadPostsStatus: string;
+  loadPostsError: string;
+};
+export type RootState = {
+  posts: PostsState;
+};

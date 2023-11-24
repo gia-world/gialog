@@ -82,3 +82,47 @@ ${content}`;
     return { success: false, message: "Creating MD file has failed." };
   }
 }
+
+export async function fsUpdatePost(id: string, updatedData: NewPost) {
+  const { title, content, createdOn, desc, tag, imgUrl } = updatedData;
+
+  const markdownContent = `---
+title: "${title}"
+createdOn: "${createdOn}"
+desc: "${desc}"
+tag: ${JSON.stringify(tag)}
+imgUrl: "${imgUrl}"
+---
+
+${content}`;
+
+  const fileName = `${id}.md`;
+  const filePath = path.join(postsDirectory, fileName);
+
+  try {
+    await fs.writeFile(filePath, markdownContent, "utf-8");
+    return {
+      success: true,
+      message: `Markdown file "${fileName}" updated successfully.`,
+      data: { ...updatedData, id: id },
+    };
+  } catch (error) {
+    return { success: false, message: `Failed to update "${fileName}".` };
+  }
+}
+
+export async function fsDeletePost(id: string) {
+  const fileName = `${id}.md`;
+  const filePath = path.join(postsDirectory, fileName);
+
+  try {
+    await fs.unlink(filePath);
+    return {
+      success: true,
+      message: `Markdown file "${fileName}" deleted successfully.`,
+      data: { id: id },
+    };
+  } catch (error) {
+    return { success: false, message: `Failed to delete "${fileName}".` };
+  }
+}

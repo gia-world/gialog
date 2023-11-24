@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 export default function CreateForm() {
   const dispatch = useAppDispatch();
-  const posts = useSelector((state: RootState) => state.posts);
+  const posts = useSelector((state: RootState) => state.posts.data);
 
   const [tagsArray, setTagsArray] = useState<string[]>([]);
 
