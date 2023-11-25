@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import useFetchData from "./useFetchData";
+import { BsArrowBarLeft, BsArrowBarRight } from "react-icons/bs";
 
 // 캐러셀은 상태가 계속 바뀌어야 하므로 **클라이언트 컴포넌트**로 만들어야 함
 
@@ -27,11 +28,14 @@ export default function AllPostsCarousel() {
 
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    initialSlide: 0,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    prevArrow: <BsArrowBarLeft />,
+    nextArrow: <BsArrowBarRight />,
     responsive: [
       {
         breakpoint: 1024,
@@ -58,6 +62,8 @@ export default function AllPostsCarousel() {
         },
       },
     ],
+    centerMode: true,
+    centerPadding: "4rem",
   };
 
   if (loadingFinished) {
