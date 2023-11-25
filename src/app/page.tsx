@@ -29,11 +29,10 @@ export default async function Home() {
   //
   return (
     <>
+      {/* <useFetchData /> */}
+      {/* //? 전체 데이터를 dispatch 하는 더 좋은 방법이 있을 것 같은데... */}
       <Profile />
-      <section>
-        <h3>Featured Posts</h3>
-        <FeaturedPosts />
-      </section>
+      {/* <FeaturedPosts posts={posts} /> */}
       <section>
         <h3>You may like..</h3>
         <AllPostsCarousel />
