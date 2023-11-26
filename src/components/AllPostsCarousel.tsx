@@ -28,7 +28,10 @@ export default function AllPostsCarousel() {
 
   const settings = {
     dots: true,
+<<<<<<< HEAD
     initialSlide: 0,
+=======
+>>>>>>> cb462093f1f09fc1d8923fc4d3ed0fce271c9dfc
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -63,6 +66,8 @@ export default function AllPostsCarousel() {
         },
       },
     ],
+    centerMode: true,
+    centerPadding: "4rem",
   };
 
   if (loadingFinished) {
