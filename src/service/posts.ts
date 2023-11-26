@@ -84,7 +84,8 @@ ${content}`;
 }
 
 export async function fsUpdatePost(id: string, updatedData: NewPost) {
-  const { title, content, createdOn, desc, tag, imgUrl } = updatedData;
+  const { title, content, createdOn, desc, tag, imgUrl, featured } =
+    updatedData;
 
   const markdownContent = `---
 title: "${title}"
@@ -92,6 +93,7 @@ createdOn: "${createdOn}"
 desc: "${desc}"
 tag: ${JSON.stringify(tag)}
 imgUrl: "${imgUrl}"
+featured: ${Boolean(featured)}
 ---
 
 ${content}`;

@@ -6,6 +6,7 @@ export type Post = {
   tag: string[];
   imgUrl: string;
   content: string;
+  featured: boolean;
 };
 
 // CreatePost 타입은 Post를 상속하여 id를 optional로 만듦

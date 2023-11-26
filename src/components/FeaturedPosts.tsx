@@ -2,7 +2,7 @@
 
 import { RootState } from "@/redux/store";
 import { Post } from "@/types/post";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import PostItemLayout from "./PostItemLayout";
 
@@ -11,23 +11,9 @@ export default function FeaturedPosts() {
   const { data, loadPostsStatus } = postsState;
 
   const loadingFinished = loadPostsStatus === "success";
-  const myPicks = [2, 3];
 
-  // const myPicks: Number[] = [];
-  // const existingIds = data.map((item) => Number(item.id));
+  const featuredPosts = data.filter((post) => post.featured === true);
 
-  // while (myPicks.length < 3) {
-  //   const randomIndex = Math.floor(Math.random() * existingIds.length);
-  //   const randomId = existingIds[randomIndex];
-
-  //   if (!myPicks.includes(randomId)) {
-  //     myPicks.push(randomId);
-  //   }
-  // }
-
-  const featuredPosts = data.filter((item) =>
-    myPicks.includes(Number(item.id))
-  );
   if (loadingFinished) {
     return (
       <section>
