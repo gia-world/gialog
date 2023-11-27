@@ -1,13 +1,13 @@
 import { fsCreatePost, fsGetPostsList } from "@/service/posts";
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiResponse } from "next";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: Request, res: NextApiResponse) {
   const posts = await fsGetPostsList();
   return res.status(200).json(posts);
 }
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const data = JSON.parse(req.body);
+export async function POST(req: Request, res: NextApiResponse) {
+  const data = await req.json();
   const result = await fsCreatePost(data);
   return res.status(200).json(result);
 }
