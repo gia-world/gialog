@@ -31,7 +31,12 @@ export default function SendMailForm() {
         <span>sender address</span>
         <input
           defaultValue="test@test.com"
-          {...register("sender")}
+          {...register("sender", {
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, // 이메일 정규식
+              message: "유효한 이메일 주소를 입력하세요",
+            },
+          })}
           className="flex-1"
         />
       </label>
