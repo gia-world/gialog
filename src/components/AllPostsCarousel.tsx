@@ -33,7 +33,7 @@ export default function AllPostsCarousel() {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     prevArrow: <BsArrowBarLeft />,
@@ -64,8 +64,6 @@ export default function AllPostsCarousel() {
         },
       },
     ],
-    centerMode: true,
-    centerPadding: "4rem",
   };
 
   if (loadingFinished) {

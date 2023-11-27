@@ -74,17 +74,16 @@ export default function AllPostsList() {
             key={post.id}
           >
             <Link href={`/posts/${post.id}`} className="flex gap-4">
-              <div className="w-[52px] h-[52px] overflow-hidden">
+              <div className="w-[52px] h-[52px] relative">
                 <Image
                   src={post.imgUrl}
                   alt={post.title}
-                  width={52}
-                  height={52}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
                 />
               </div>
               <div>
                 <p className="text-lg font-semibold">{post.title}</p>
-
                 <p className="text-gray-500">{post.desc}</p>
               </div>
             </Link>
