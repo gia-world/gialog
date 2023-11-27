@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/loading";
 import { RootState } from "@/redux/store";
 import { Post } from "@/types/post";
 import React, { useState } from "react";
@@ -27,6 +28,6 @@ export default function FeaturedPosts() {
       </section>
     );
   } else {
-    return null;
+    return <Loading />;
   }
 }

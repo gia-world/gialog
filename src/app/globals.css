@@ -1,10 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.react-icons {
-  @apply align-middle;
+.main-height {
+  min-height: calc(100vh - 96px);
 }
-
 .title {
   @apply text-lg mb-4 font-semibold italic;
 }

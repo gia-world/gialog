@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import useFetchData from "./useFetchData";
 import { fetchAllPostsData } from "../redux/posts/actions";
 import Image from "next/image";
+import Loading from "@/app/loading";
 
 export default function AllPostsList() {
   const dispatch = useAppDispatch();
@@ -95,6 +96,6 @@ export default function AllPostsList() {
       </div>
     );
   } else {
-    return null;
+    return <Loading />;
   }
 }

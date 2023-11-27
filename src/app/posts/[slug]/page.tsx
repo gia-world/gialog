@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@/app/loading";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { Post } from "@/types/post";
 import axios from "axios";
@@ -70,5 +71,7 @@ export default function PostDetailPage({ params: { slug } }: Props) {
         </div>
       </section>
     );
+  } else {
+    return <Loading />;
   }
 }

@@ -33,7 +33,7 @@ export default function RootLayout({
             <Link href="/contact">CONTACT</Link>
           </nav>
         </header>
-        <main className="min-h-screen flex flex-col gap-12 p-10">
+        <main className="main-height flex flex-col gap-12 p-10">
           <ReduxProvider>{children}</ReduxProvider>
         </main>
         <footer className="bg-slate-100 py-2">

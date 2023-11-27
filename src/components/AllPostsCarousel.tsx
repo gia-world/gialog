@@ -10,6 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import useFetchData from "./useFetchData";
 import { BsArrowBarLeft, BsArrowBarRight } from "react-icons/bs";
+import Loading from "@/app/loading";
 
 // 캐러셀은 상태가 계속 바뀌어야 하므로 **클라이언트 컴포넌트**로 만들어야 함
 
@@ -78,6 +79,6 @@ export default function AllPostsCarousel() {
       </Slider>
     );
   } else {
-    return null;
+    return <Loading />;
   }
 }
