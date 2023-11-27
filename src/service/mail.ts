@@ -25,5 +25,9 @@ export async function sendEmail({ sender, title, content }: Mail) {
     `,
   };
 
+  /*
+  gmail의 경우 smtp 서버가 from 필드에 외부 주소 사용하는 것을 허용하지 않을 수 있음
+  */
+
   return transporter.sendMail(mailData);
 }
