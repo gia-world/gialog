@@ -119,10 +119,11 @@ export default function CreateForm({ id }: { id?: string }) {
             {...register("tag")}
             className="form-input"
             onKeyDown={(e) => {
+              console.log(tagsArray);
               if (e.key === "Enter" || e.key === ",") {
                 e.preventDefault();
-                const tagInput = (e.target as HTMLInputElement).value.trim();
-                if (tagInput !== "") {
+                const tagInput = (e.target as HTMLInputElement).value.trim(); //공백 제거
+                if (tagInput !== "" || !tagsArray.includes(tagInput)) {
                   setTagsArray((prevTags) => [...prevTags, tagInput]);
                   (e.target as HTMLInputElement).value = "";
                 }
@@ -141,8 +142,8 @@ export default function CreateForm({ id }: { id?: string }) {
                 <button
                   type="button"
                   onClick={() => {
-                    setTagsArray((prevTags) =>
-                      prevTags.filter((_, i) => i !== index)
+                    setTagsArray(
+                      (prevTags) => prevTags.filter((_, i) => i !== index) //배열의 인덱스가 index와 다른 요소들만 새 배열로 필터링
                     );
                   }}
                 >
