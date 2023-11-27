@@ -1,3 +1,4 @@
+import SendMailForm from "@/components/SendMailForm";
 import Link from "next/link";
 import React from "react";
 import { AiFillGithub, AiFillInstagram, AiFillYoutube } from "react-icons/ai";
@@ -27,7 +28,7 @@ export default function ContactPage() {
       </section>
       <section>
         <h3>이메일 폼</h3>
-        <form></form>
+        <SendMailForm />
       </section>
     </>
   );

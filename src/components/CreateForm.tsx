@@ -25,6 +25,7 @@ export default function CreateForm({ id }: { id?: string }) {
     setValue,
     formState: { errors },
   } = useForm<NewPost>();
+
   const onSubmit: SubmitHandler<NewPost> = async (data) => {
     const payload = {
       ...data,
