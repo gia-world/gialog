@@ -18,7 +18,7 @@ export default function FeaturedPosts() {
   if (loadingFinished) {
     return (
       <section>
-        <ul className="grid grid-cols-3 gap-4">
+        <ul className="grid grid-cols-4 gap-4">
           {featuredPosts.map((post) => (
             <li key={`featuredPost-${post.id}`}>
               <PostItemLayout post={post} />

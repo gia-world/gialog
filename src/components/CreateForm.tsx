@@ -123,7 +123,7 @@ export default function CreateForm({ id }: { id?: string }) {
               if (e.key === "Enter" || e.key === ",") {
                 e.preventDefault();
                 const tagInput = (e.target as HTMLInputElement).value.trim(); //공백 제거
-                if (tagInput !== "" || !tagsArray.includes(tagInput)) {
+                if (tagInput !== "" && !tagsArray.includes(tagInput)) {
                   setTagsArray((prevTags) => [...prevTags, tagInput]);
                   (e.target as HTMLInputElement).value = "";
                 }
