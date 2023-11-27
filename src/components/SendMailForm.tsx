@@ -26,9 +26,9 @@ export default function SendMailForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-      <label className="flex gap-2">
-        <span>sender address</span>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <label className="form-label">
+        <span className="form-name">Sender</span>
         <input
           defaultValue="test@test.com"
           {...register("sender", {
@@ -37,22 +37,26 @@ export default function SendMailForm() {
               message: "유효한 이메일 주소를 입력하세요",
             },
           })}
-          className="flex-1"
+          className="form-input"
         />
       </label>
-      <label className="flex gap-2">
-        <span>title</span>
-        <input defaultValue="test" {...register("title")} className="flex-1" />
+      <label className="form-label">
+        <span className="form-name">Title</span>
+        <input
+          defaultValue="test"
+          {...register("title")}
+          className="form-input"
+        />
       </label>
-      <label className="flex gap-2">
-        <span>content</span>
+      <label className="form-label">
+        <span className="form-name">Content</span>
         <textarea
           defaultValue="test"
           {...register("content")}
-          className="flex-1"
+          className="form-input"
         />
       </label>
-      <input type="submit" />
+      <input type="submit" className="button self-center" />
     </form>
   );
 }

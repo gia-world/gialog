@@ -45,18 +45,20 @@ export default function CreateForm({ id }: { id?: string }) {
           },
         });
       }
-
+      let postId;
       if (response && response.status === 200) {
         const { data } = response.data;
         console.log(data, "response.data");
         if (id) {
           dispatch(updatePost(id, data));
+          postId = id;
         } else {
           dispatch(createPost(data));
+          postId = data.id;
         }
 
         window.alert(`${id ? "수정" : "작성"}이 완료되었습니다.`);
-        router.push("/");
+        router.push(`/posts/${postId}`);
       } else {
         console.error("Failed to create file");
       }
@@ -91,59 +93,75 @@ export default function CreateForm({ id }: { id?: string }) {
   }, [post, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-      <label className="flex gap-2">
-        <span>title</span>
-        <input defaultValue="test" {...register("title")} className="flex-1" />
-      </label>
-      <label className="flex gap-2">
-        <span>desc</span>
-        <input defaultValue="test" {...register("desc")} className="flex-1" />
-      </label>
-      <label className="flex gap-2">
-        <span>Tags</span>
-        <input
-          placeholder="Enter tags and press Enter"
-          {...register("tag")}
-          className="flex-1"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === ",") {
-              e.preventDefault();
-              const tagInput = (e.target as HTMLInputElement).value.trim();
-              if (tagInput !== "") {
-                setTagsArray((prevTags) => [...prevTags, tagInput]);
-                (e.target as HTMLInputElement).value = "";
+    <>
+      <h2 className="title">{id ? "Edit Post" : "New Post"}</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <label className="form-label">
+          <span className="form-name">Title</span>
+          <input
+            defaultValue="test"
+            {...register("title")}
+            className="form-input"
+          />
+        </label>
+        <label className="form-label">
+          <span className="form-name">Desc</span>
+          <input
+            defaultValue="test"
+            {...register("desc")}
+            className="form-input"
+          />
+        </label>
+        <label className="form-label">
+          <span className="form-name">Tags</span>
+          <input
+            placeholder="Enter tags and press Enter or type comma(,)."
+            {...register("tag")}
+            className="form-input"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === ",") {
+                e.preventDefault();
+                const tagInput = (e.target as HTMLInputElement).value.trim();
+                if (tagInput !== "") {
+                  setTagsArray((prevTags) => [...prevTags, tagInput]);
+                  (e.target as HTMLInputElement).value = "";
+                }
               }
-            }
-          }}
-        />
-      </label>
-      <div className="flex gap-2">
-        {tagsArray.map((tag, index) => (
-          <div key={index} className="tag flex">
-            <span>{tag}</span>
-            <button
-              type="button"
-              onClick={() => {
-                setTagsArray((prevTags) =>
-                  prevTags.filter((_, i) => i !== index)
-                );
-              }}
-            >
-              <BsX />
-            </button>
+            }}
+          />
+        </label>
+        {tagsArray.length > 0 && (
+          <div className="flex gap-2">
+            {tagsArray.map((tag, index) => (
+              <div
+                key={index}
+                className="tag flex gap-1 bg-rose-200 rounded-xl px-2"
+              >
+                <span>{tag}</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setTagsArray((prevTags) =>
+                      prevTags.filter((_, i) => i !== index)
+                    );
+                  }}
+                >
+                  <BsX />
+                </button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <label className="flex gap-2">
-        <span>content</span>
-        <textarea
-          defaultValue="test"
-          {...register("content")}
-          className="flex-1"
-        />
-      </label>
-      <input type="submit" />
-    </form>
+        )}
+        <label className="form-label">
+          <span className="form-name">Content</span>
+          <textarea
+            defaultValue="test"
+            {...register("content")}
+            className="form-input"
+          />
+        </label>
+        <input type="submit" className="button self-center" />
+      </form>
+    </>
   );
 }

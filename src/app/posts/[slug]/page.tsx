@@ -20,7 +20,7 @@ export default function PostDetailPage({ params: { slug } }: Props) {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       const response = await axios.delete(`/api/post/${slug}`);
       console.log(response.data);
-      router.push("/");
+      router.push("/posts");
     }
   }
 
@@ -37,16 +37,38 @@ export default function PostDetailPage({ params: { slug } }: Props) {
   }, [slug]);
   if (post) {
     return (
-      <>
+      <section>
         <div className="flex gap-4 justify-end">
           <Link href={`/posts/${post.id}/edit`}>
-            <button>Edit</button>
+            <button className="button">수정</button>
           </Link>
-          <button onClick={handleDelete}>Delete</button>
+          <button className="button" onClick={handleDelete}>
+            삭제
+          </button>
         </div>
-        <div className="bg-amber-200">{post && post.title}</div>
-        <MarkdownRenderer postContent={post.content} />
-      </>
+        <div className="mb-8">
+          <h2 className="title">{post && post.title}</h2>
+          <div className="flex justify-between mb-4">
+            <ul className="flex gap-2">
+              {post.tag.map((tag, i) => (
+                <li
+                  key={`tag-${i}`}
+                  className="bg-rose-200 rounded-xl px-2 text-sm"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+            <p className="text-sm">{post.createdOn}</p>
+          </div>
+          <MarkdownRenderer postContent={post.content} />
+        </div>
+        <div className="text-end">
+          <Link href={"/posts"}>
+            <button className="button">목록</button>
+          </Link>
+        </div>
+      </section>
     );
   }
 }

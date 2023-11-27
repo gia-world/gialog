@@ -2,5 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 .react-icons {
-  vertical-align: middle;
+  @apply align-middle;
+}
+
+.title {
+  @apply text-lg mb-4 font-semibold italic;
+}
+.title::before {
+  content: "✨";
+  @apply mr-1;
+}
+
+.button {
+  @apply bg-rose-400 hover:bg-rose-300 text-white py-1 px-4 rounded transition duration-200;
+}
+
+.form-name {
+  @apply w-20;
+}
+
+.form-input {
+  @apply flex-1 border rounded py-1 px-2;
+}
+
+.form-label {
+  @apply flex gap-2 items-center;
 }

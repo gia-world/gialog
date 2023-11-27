@@ -7,7 +7,7 @@ export default function ContactPage() {
   return (
     <>
       <section>
-        <h3 className="text-center">Contact Me</h3>
+        <h2 className="title text-center">Contact Me</h2>
         <ul className="flex items-center justify-center gap-2">
           <li>
             <Link href="">
@@ -27,7 +27,7 @@ export default function ContactPage() {
         </ul>
       </section>
       <section>
-        <h3>이메일 폼</h3>
+        <h2 className="title">Send an Email to me</h2>
         <SendMailForm />
       </section>
     </>

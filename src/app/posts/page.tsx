@@ -4,16 +4,14 @@ import React from "react";
 
 export default function PostsPage() {
   return (
-    <>
-      <section className="text-end">
+    <section className="relative">
+      <h2 className="title">포스트 리스트</h2>
+      <div className="text-end absolute right-0 top-0">
         <Link href="/posts/write">
-          <button>글쓰기</button>
+          <button className="button">글쓰기</button>
         </Link>
-      </section>
-      <section>
-        <h3>포스트 리스트</h3>
-        <AllPostsList />
-      </section>
-    </>
+      </div>
+      <AllPostsList />
+    </section>
   );
 }

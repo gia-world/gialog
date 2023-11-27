@@ -11,9 +11,9 @@ import { BsStar, BsStarFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import useFetchData from "./useFetchData";
 import { fetchAllPostsData } from "../redux/posts/actions";
+import Image from "next/image";
 
 export default function AllPostsList() {
-  //   useFetchData();
   const dispatch = useAppDispatch();
 
   const postsState = useSelector((state: RootState) => state.posts);
@@ -68,14 +68,28 @@ export default function AllPostsList() {
     return (
       <div className="grid grid-cols-1 gap-4">
         {posts.map((post: Post) => (
-          <div className="border p-4 rounded-md" key={post.id}>
+          <div
+            className="border p-4 rounded-md flex justify-between items-start max-h-[86px]"
+            key={post.id}
+          >
+            <Link href={`/posts/${post.id}`} className="flex gap-4">
+              <div className="w-[52px] h-[52px] overflow-hidden">
+                <Image
+                  src={post.imgUrl}
+                  alt={post.title}
+                  width={52}
+                  height={52}
+                />
+              </div>
+              <div>
+                <p className="text-lg font-semibold">{post.title}</p>
+
+                <p className="text-gray-500">{post.desc}</p>
+              </div>
+            </Link>
             <button onClick={() => handleToggleFeatured(post.id)}>
               {post.featured ? <BsStarFill /> : <BsStar />}
             </button>
-            <Link href={`/posts/${post.id}`}>
-              <p className="text-lg font-semibold">{post.title}</p>
-            </Link>
-            <p className="text-gray-500">{post.desc}</p>
           </div>
         ))}
       </div>

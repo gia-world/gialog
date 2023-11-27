@@ -9,9 +9,8 @@ type Props = {
 
 export default function PostEditPage({ params: { slug } }: Props) {
   return (
-    <div>
-      <h3>수정</h3>
+    <section>
       <CreateForm id={slug} />
-    </div>
+    </section>
   );
 }

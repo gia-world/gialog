@@ -29,13 +29,16 @@ export default async function Home() {
   //
   return (
     <>
-      <Profile />
       <section>
-        <h3>Featured Posts</h3>
+        <h2 className="hidden">About</h2>
+        <Profile />
+      </section>
+      <section>
+        <h2 className="title">Featured Posts</h2>
         <FeaturedPosts />
       </section>
       <section>
-        <h3>You may like..</h3>
+        <h2 className="title">You may like..</h2>
         <AllPostsCarousel />
       </section>
     </>
