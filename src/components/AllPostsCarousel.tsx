@@ -8,7 +8,7 @@ import { Post } from "@/types/post";
 import { useSelector } from "react-redux";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import useFetchData from "./useFetchData";
+import useFetchData from "../hooks/useFetchData";
 import { BsArrowBarLeft, BsArrowBarRight } from "react-icons/bs";
 import Loading from "@/app/loading";
 

@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import useFetchData from "./useFetchData";
+import useFetchData from "../hooks/useFetchData";
 import { fetchAllPostsData } from "../redux/posts/actions";
 import Image from "next/image";
 import Loading from "@/app/loading";

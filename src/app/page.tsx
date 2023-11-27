@@ -1,10 +1,10 @@
 import AllPostsCarousel from "@/components/AllPostsCarousel";
 import FeaturedPosts from "@/components/FeaturedPosts";
-import FetchData from "@/components/useFetchData";
+import FetchData from "@/hooks/useFetchData";
 import Profile from "@/components/Profile";
 import { fetchAllPostsData } from "@/redux/posts/actions";
 import { useAppDispatch } from "@/redux/store";
-import useFetchData from "@/components/useFetchData";
+import useFetchData from "@/hooks/useFetchData";
 export default async function Home() {
   // const posts = await getPostsList();
   // console.log(posts);
