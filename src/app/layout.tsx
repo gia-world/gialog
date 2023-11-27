@@ -1,11 +1,11 @@
 import ReduxProvider from "@/redux/provider";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import Link from "next/link";
 import { BsStars } from "react-icons/bs";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Gialog",
@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={montserrat.className}>
         <header className="bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 flex justify-between px-10 py-4">
           <Link href="/">
             <h1 className="flex items-center text-lg">
