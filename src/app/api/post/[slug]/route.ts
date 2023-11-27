@@ -1,9 +1,4 @@
-import {
-  fsDeletePost,
-  fsGetPostDetail,
-  fsGetPostsList,
-  fsUpdatePost,
-} from "@/service/posts";
+import { fsDeletePost, fsGetPostDetail, fsUpdatePost } from "@/service/posts";
 import { NextResponse } from "next/server";
 
 export async function GET(

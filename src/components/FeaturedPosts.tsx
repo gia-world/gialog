@@ -2,8 +2,6 @@
 
 import Loading from "@/app/loading";
 import { RootState } from "@/redux/store";
-import { Post } from "@/types/post";
-import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import PostItemLayout from "./PostItemLayout";
 

@@ -1,16 +1,14 @@
 "use client";
 
 import { createPost, updatePost } from "@/redux/posts/actions";
-import { RootState, useAppDispatch } from "@/redux/store";
+import { useAppDispatch } from "@/redux/store";
 import { NewPost, Post } from "@/types/post";
 import today from "@/utils/today";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Router from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BsX } from "react-icons/bs";
-import { useSelector } from "react-redux";
 
 export default function CreateForm({ id }: { id?: string }) {
   const dispatch = useAppDispatch();

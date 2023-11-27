@@ -1,18 +1,16 @@
 "use client";
 
+import Loading from "@/app/loading";
 import { updatePost } from "@/redux/posts/actions";
 import { RootState, useAppDispatch } from "@/redux/store";
 import { Post } from "@/types/post";
 import axios from "axios";
-import { produce } from "immer";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import useFetchData from "../hooks/useFetchData";
 import { fetchAllPostsData } from "../redux/posts/actions";
-import Image from "next/image";
-import Loading from "@/app/loading";
 
 export default function AllPostsList() {
   const dispatch = useAppDispatch();
