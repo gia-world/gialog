@@ -24,6 +24,13 @@ export default function AllPostsList() {
 
   const [posts, setPosts] = useState(data ?? []);
   const categories = ["all", ...new Set(posts.flatMap((post) => post.tag))];
+  // * Set
+  // Set 객체는 값들의 순서를 유지하며, 어떤 값도 한 번만 등장하도록 보장
+  // 중복이 제거된 값들이 포함된 새로운 배열을 생성하는 것이 아니라, 중복 제거된 값을 Set 객체 내부에 저장
+  // 스프레드연산자를 사용하여 Set 객체를 배열로 반활할 수 있다.
+  // * flatMap
+  // flatMap() = map() + flat()
+  // flat() 중첩된 배열 내부에 있는 모든 요소들을 단일한 레벨의 배열로 만들어주는 메서드
 
   const selected: string | null = useSearchParams().get("category");
   const filteredPost =
