@@ -1,4 +1,5 @@
 import AllPostsList from "@/components/AllPostsList";
+import Categories from "@/components/Categories";
 import Link from "next/link";
 import React from "react";
 

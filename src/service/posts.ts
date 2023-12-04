@@ -5,6 +5,24 @@ import { NewPost, Post, ApiResponse } from "@/types/post";
 
 const postsDirectory = path.join(process.cwd(), "public/posts");
 
+// export async function fsGetTags() {
+//   const result: ApiResponse<Post[]> = await fsGetPostsList();
+//   if (result.success && result.data) {
+//     const tags: string[] = result.data.reduce(
+//       (allTags: string[], post: Post) => {
+//         // 각 포스트의 tags 배열을 합침
+//         const postTags: string[] = post.tag || []; // 만약 태그가 없는 경우를 대비해 기본값으로 빈 배열 설정
+//         return allTags.concat(postTags);
+//       },
+//       []
+//     );
+//     const catagories = ["all", ...tags];
+//     return catagories;
+//   } else {
+//     console.error("Error");
+//   }
+// }
+
 export async function fsGetPostsList(): Promise<ApiResponse<Post[]>> {
   try {
     const fileNames = await fs.readdir(postsDirectory);
