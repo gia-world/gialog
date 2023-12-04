@@ -10,11 +10,11 @@ export default function Categories({ categories }: { categories: string[] }) {
   return (
     <div className="flex gap-2">
       <p className="font-semibold">CATEGORIES :</p>
-      <ul className="flex mb-2">
+      <ul className="flex gap-2 mb-2">
         {categories.map((category) => (
           <li
             key={category}
-            className="cursor-pointer hover:bg-rose-100 px-1"
+            className="cursor-pointer hover:bg-rose-100 px-2"
             onClick={() => router.push(`/posts?category=${category}`)}
           >
             {category}

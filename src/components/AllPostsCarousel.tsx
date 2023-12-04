@@ -65,17 +65,17 @@ export default function AllPostsCarousel() {
     ],
   };
 
-  if (loadingFinished) {
-    return (
-      <Slider {...settings}>
-        {data.map((post) => (
-          <li key={`post-${post.id}`}>
-            <PostItemLayout post={post} />
-          </li>
-        ))}
-      </Slider>
-    );
-  } else {
-    return <Loading />;
-  }
+  // if (loadingFinished) {
+  return (
+    <Slider {...settings}>
+      {data.map((post) => (
+        <li key={`post-${post.id}`}>
+          <PostItemLayout post={post} />
+        </li>
+      ))}
+    </Slider>
+  );
+  // } else {
+  //   return <Loading />;
+  // }
 }

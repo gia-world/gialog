@@ -5,13 +5,13 @@ import React from "react";
 
 export default function PostsPage() {
   return (
-    <section className="relative">
-      <h2 className="title">포스트 리스트</h2>
-      <div className="text-end absolute right-0 top-0">
+    <section>
+      <div className="float-right">
         <Link href="/posts/write">
           <button className="button">글쓰기</button>
         </Link>
       </div>
+      <h2 className="title">포스트 리스트</h2>
       <AllPostsList />
     </section>
   );
